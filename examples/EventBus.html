@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>发布订阅模式示例</title>
+    <script src="../src/EventBus.js"></script>
+    <style>
+      #log {
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 300px;
+        height: 150px;
+        overflow-y: auto;
+        margin-top: 10px;
+        font-family: monospace;
+        background: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>发布订阅模式演示</h2>
+    <button id="btnPublish">发布事件</button>
+    <button id="btnSubscribe">订阅事件</button>
+    <button id="btnUnsubscribe">取消订阅</button>
+
+    <div id="log"></div>
+
+    <script>
+      const bus = new EventBus()
+      const logEl = document.getElementById('log')
+
+      // 订阅回调函数
+      function onMessage(data) {
+        console.log("message", data);      
+        const p = document.createElement('p')
+        p.textContent = '收到消息: ' + data
+        logEl.appendChild(p)
+        logEl.scrollTop = logEl.scrollHeight
+      }
+
+      // 订阅事件
+      document.getElementById('btnSubscribe').onclick = () => {
+        bus.on('myEvent', onMessage)
+        console.log('bus.events', bus.events)
+        const p = document.createElement('p')
+        p.textContent = '已订阅事件'
+        logEl.appendChild(p)
+      }
+      // 取消订阅
+      document.getElementById('btnUnsubscribe').onclick = () => {
+        bus.off('myEvent', onMessage)
+        console.log('bus.events', bus.events)
+        const p = document.createElement('p')
+        p.textContent = '已取消订阅事件'
+        logEl.appendChild(p)
+      }
+      // 发布事件
+      document.getElementById('btnPublish').onclick = () => {
+        bus.emit('myEvent', '按钮点击触发消息')
+        console.log('bus.events', bus.events)
+        const p = document.createElement('p')
+        p.textContent = '事件已发布'
+        logEl.appendChild(p)
+      }
+    </script>
+  </body>
+</html>
