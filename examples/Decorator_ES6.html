@@ -28,7 +28,10 @@ const loggedAndSecuredService = new LogDecorator(securedService);
 
 // 绑定事件
 document.getElementById("myBtn").addEventListener("click", () => {
-  loggedAndSecuredService.doSomething();
+  loggedAndSecuredService.doSomething({
+    name: '张三',
+    age: 30
+  });
 });
 </script>
 </html>

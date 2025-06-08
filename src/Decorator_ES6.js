@@ -1,6 +1,7 @@
 // 基础类
 class ActionService {
-  doSomething() {
+  doSomething(...args) {
+    console.log("args", ...args);
     console.log("执行主功能：做某件事");
   }
 }
