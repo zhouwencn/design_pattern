@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>装饰器模式</title>
+  <script src="../src/Decorator_ES5.js"></script>
+</head>
+<body>
+  <button id="myBtn">点击我</button>
+</body>
+<script>
+  // 组合装饰器（先权限后日志）
+let userRole = "guest"; // 改成 'admin' 试试看
+let decoratedDoSomething = withLog(withPermission(doSomething, userRole));
+
+// 绑定事件
+document.getElementById("myBtn").addEventListener("click", decoratedDoSomething);
+</script>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>装饰器模式</title>
+  <script src="../src/Decorator_ES6.js"></script>
+</head>
+<body>
+  <button id="myBtn">点击我</button>
+</body>
+<script>
+// 用户角色
+const userRole = 'admin'; // 改成 'admin' 试试看
+
+// 原始类
+const actionService = new ActionService();
+
+// 添加权限装饰器
+const securedService = new PermissionDecorator(actionService, userRole);
+
+// 添加日志装饰器
+const loggedAndSecuredService = new LogDecorator(securedService);
+
+// 调用方法（装饰器链式组合）
+// loggedAndSecuredService.doSomething();
+
+
+// 绑定事件
+document.getElementById("myBtn").addEventListener("click", () => {
+  loggedAndSecuredService.doSomething();
+});
+</script>
+</html>
